@@ -31,7 +31,7 @@
 			function(googleUser) {
 			document.getElementById('profile-account').innerHTML = "<img src=\"" + googleUser.getBasicProfile().getImageUrl() + "\" class=\"profile-image\"/><br/>" +
 			"<p class=\"profile-info\">Masuk sebagai <b>" + googleUser.getBasicProfile().getEmail() + "</b></p>" + 
-			"<a href=\"http://localhost/login/\" onclick=\"signOut();\" id=\"customBtn\" class=\"btn\">Keluar Akun</a>";
+			"<a href=\"https://aditnjr.github.io/googlesignin/\" onclick=\"signOut();\" id=\"customBtn\" class=\"btn\">Keluar Akun</a>";
 			}, function(error) {
 			alert(JSON.stringify(error, undefined, 2));
 			});
