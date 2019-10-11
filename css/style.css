@@ -214,4 +214,9 @@ span.buttonText {
   .wrap-login {
     padding-top: 20px
   }
+
+ #footer {
+	font-size : 8px;
+  }
+
 }
