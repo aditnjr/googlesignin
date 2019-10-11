@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Google Sign In</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="shortcut icon" href="images/g-normal.png">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+	<script src="https://apis.google.com/js/api:client.js"></script>
+	<script>
+	var googleUser = {};
+	var startApp = function() {
+		gapi.load('auth2', function(){
+			// Retrieve the singleton for the GoogleAuth library and set up the client.
+			auth2 = gapi.auth2.init({
+			client_id: '2526930887-u7pc6ddsnmcse9aijig5ut6f8jcodv5c.apps.googleusercontent.com',
+			cookiepolicy: 'single_host_origin',
+			// Request scopes in addition to 'profile' and 'email'
+			//scope: 'additional_scope'
+			});
+		attachSignin(document.getElementById('customBtn'));
+		});
+	};
+
+	function attachSignin(element) {
+		console.log(element.id);
+		auth2.attachClickHandler(element, {},
+			function(googleUser) {
+			document.getElementById('profile-account').innerHTML = "<img src=\"" + googleUser.getBasicProfile().getImageUrl() + "\" class=\"profile-image\"/><br/>" +
+			"<p class=\"profile-info\">Masuk sebagai <b>" + googleUser.getBasicProfile().getEmail() + "</b></p>" + 
+			"<a href=\"http://localhost/login/\" onclick=\"signOut();\" id=\"customBtn\" class=\"btn\">Keluar Akun</a>";
+			}, function(error) {
+			alert(JSON.stringify(error, undefined, 2));
+			});
+	}
+	
+	function signOut() {
+		var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut().then(function () {
+			document.getElementById('profile-account').innerHTML = "<p>Tunggu sebentar...</p>";
+		});
+  }
+	</script>
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login">
+			<div class="wrap-login">
+				<span class="login-form-title">
+				Google Sign In
+				</span>
+				<div class="profile-account" id="profile-account">
+					<div id="gSignInWrapper">
+						<div id="customBtn" class="btn">
+						<span class="icon"></span>
+						<span class="buttonText">Masuk Dengan Google</span>
+					</div>
+					<script>startApp();</script>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div id="footer">
+		Praktikum Jaringan Komputer - Aditya Nur Juang Rahmanda / 4210181021
+		</div>
+	</div>
+	
+	
+<!--===============================================================================================-->
+	<script src="js/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+</body>
+</html>
